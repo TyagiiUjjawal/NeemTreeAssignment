@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Upload Candidates</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .upload-container {
+        border-top: 4px solid #333;
+        padding-top: 20px;
+        width: 400px;
+        margin: 20px auto;
+      }
+      .upload-header {
+        /* display: block; */
+        font-size: 24px;
+        font-weight: bold;
+        background-color: #d0c46c;
+        margin-bottom: 20px;
+      }
+      .hidden {
+        display: none;
+      }
+      .visible {
+        display: block;
+      }
+      .file-upload {
+        /* float: left; */
+        display: <% message ? 'none' : 'block' %>;
+
+        /* display: flex; */
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border: 2px dashed #333;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .file-upload input[type="file"] {
+        display: none;
+      }
+      .file-upload label {
+        cursor: pointer;
+      }
+      .file-upload button {
+        margin-left: 10em;
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .message-box {
+        border: 2px solid #333;
+        padding: 20px;
+        display: <% message ? 'block' : 'none' %>;
+      }
+      .message-box p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="upload-container">
+      <div class="upload-header">
+        <h1>Add from Excel</h1>
+      </div>
+      <div class="file-upload <%= message ? 'hidden' : 'visible' %>">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <label for="excelFile">
+            <input
+              type="file"
+              id="excelFile"
+              name="excelFile"
+              accept=".xlsx, .xls"
+            />
+            <i class="fa fa-upload" style="font-size: 48px; color: #d0c46c"></i>
+          </label>
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+      <div class="message-box <%= message ? 'visible' : 'hidden' %>">
+        <% if (message) { %>
+        <p><%= message %></p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
