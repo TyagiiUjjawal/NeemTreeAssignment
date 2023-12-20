@@ -5,10 +5,23 @@ const uploadController = require("./controller/uploadController");
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/candidatesDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(
+//   "mongodb+srv://admin:ZxqJBpgTSIIbJ82D@cluster0.lhnaw.mongodb.net/NeemTree",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }
+// );
+mongoose
+  .connect(
+    "mongodb+srv://admin:ZxqJBpgTSIIbJ82D@cluster0.lhnaw.mongodb.net/NeemTree"
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
